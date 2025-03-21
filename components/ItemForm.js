@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../lib/auth/authContext';
-import { API_ENDPOINTS } from '../lib/config';
 
 export default function ItemForm({ type }) {
   const router = useRouter();
@@ -101,7 +100,7 @@ export default function ItemForm({ type }) {
       };
       
       // Submit to the API
-      const response = await fetch(API_ENDPOINTS.ITEMS, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/items`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

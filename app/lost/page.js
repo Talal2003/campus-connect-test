@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ItemCard from '../../components/ItemCard';
 import SearchBox from '../../components/SearchBox';
-import { API_ENDPOINTS } from '../../lib/config';
 
 export default function LostItemsPage() {
   const [items, setItems] = useState([]);
@@ -13,24 +12,23 @@ export default function LostItemsPage() {
   const [error, setError] = useState(null);
   
   useEffect(() => {
-    // Fetch items from API
+    // Fetch real data from the API
     const fetchItems = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`${API_ENDPOINTS.ITEMS}?type=lost`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/items?type=lost`);
         
         if (!response.ok) {
-          throw new Error('Failed to fetch lost items');
+          throw new Error('Failed to fetch items');
         }
         
         const data = await response.json();
-        // Sort items by date (newest first)
         const sortedItems = data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setItems(sortedItems);
         setFilteredItems(sortedItems);
       } catch (error) {
         console.error('Error fetching lost items:', error);
-        setError('Failed to load lost items');
+        setError('Failed to load items. Please try again later.');
       } finally {
         setIsLoading(false);
       }
