@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../lib/auth/authContext';
+import { API_ENDPOINTS } from '../lib/config';
 
 export default function ItemForm({ type }) {
   const router = useRouter();
@@ -100,7 +101,7 @@ export default function ItemForm({ type }) {
       };
       
       // Submit to the API
-      const response = await fetch('http://localhost:5000/api/items', {
+      const response = await fetch(API_ENDPOINTS.ITEMS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

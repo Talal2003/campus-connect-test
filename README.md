@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Campus Connect Frontend
+
+This is the frontend for the Campus Connect application, a lost and found system for university campuses.
+
+## Features
+
+- User authentication (login/register)
+- Report lost and found items
+- Search and filter items by various criteria
+- Responsive design for mobile and desktop
+- Integration with backend API
+
+## Technologies Used
+
+- Next.js 13+ (App Router)
+- React
+- CSS Modules
+- JWT Authentication
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
+- Node.js 18+ 
+- npm or yarn
+- Backend API server (running locally during development)
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone <your-github-repo-url>
+   cd campus-connect-frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create `.env.local` file in the root directory with the following variables:
+   ```
+   NEXT_PUBLIC_API_URL=http://localhost:5000
+   ```
+
+### Running the Development Server
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This frontend can be deployed to various platforms:
 
-## Learn More
+### Deploying to Vercel (Recommended)
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Configure environment variables in Vercel dashboard
+4. Deploy!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deploying to GitHub Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Configure your `next.config.js` for static export:
+   ```js
+   /** @type {import('next').NextConfig} */
+   const nextConfig = {
+     output: 'export',
+     images: {
+       unoptimized: true,
+     },
+   }
+   
+   module.exports = nextConfig
+   ```
 
-## Deploy on Vercel
+2. Add a deploy script to your `package.json`:
+   ```json
+   "scripts": {
+     "deploy": "next build && next export && touch out/.nojekyll && gh-pages -d out"
+   }
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Install the gh-pages package:
+   ```
+   npm install --save-dev gh-pages
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Run the deploy script:
+   ```
+   npm run deploy
+   ```
+
+## Backend API Integration
+
+This frontend is designed to work with a local backend API running on http://localhost:5000. To configure the frontend to work with a different API URL:
+
+1. Update the `NEXT_PUBLIC_API_URL` in your `.env.local` file
+2. Rebuild and redeploy the application
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
